@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: s3_to_clickhouse_etl_app
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_APP: src/s3_to_clickhouse_etl/app.py
+    volumes:
+      - .:/src/s3_to_clickhouse_etl
+    command: ["poetry", "run", "python"]
